@@ -1,3 +1,4 @@
+title: Suspicious PowerShell Execution
 id: 7f7f7d0a-7e6a-4f6c-9a9a-8c3b3e5a1f21
 status: experimental
 description: Detects PowerShell execution with common suspicious command-line parameters.
