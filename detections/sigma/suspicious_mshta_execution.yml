@@ -1,0 +1,21 @@
+title: Suspicious Mshta Execution
+id: 8f31c6a2-74d9-4e58-b205-91a7d643c820
+status: experimental
+description: Detects execution through the Windows mshta utility.
+author: Fernando Bahia
+date: 2026/08/18
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        Image|endswith:
+            - '\mshta.exe'
+    condition: selection
+falsepositives:
+    - Legacy enterprise applications
+    - Legitimate HTA applications
+level: high
+
+tags:
+    - attack.t1218.005

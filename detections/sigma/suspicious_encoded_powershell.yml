@@ -1,0 +1,26 @@
+title: Suspicious Encoded PowerShell Command
+id: 5a8c7d21-3f64-4e92-b1a7-6d9c2f845e13
+status: experimental
+description: Detects PowerShell execution using encoded command parameters.
+author: Fernando Bahia
+date: 2026/08/18
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_image:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+    selection_encoded:
+        CommandLine|contains:
+            - '-enc '
+            - '-encodedcommand '
+    condition: selection_image and selection_encoded
+falsepositives:
+    - Legitimate administrative scripts
+    - Automation frameworks
+level: high
+tags:
+    - attack.execution
+    - attack.t1059.001

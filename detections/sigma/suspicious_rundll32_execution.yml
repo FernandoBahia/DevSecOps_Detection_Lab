@@ -1,0 +1,21 @@
+title: Suspicious Rundll32 Execution
+id: 7b2d9e43-81f6-4c25-a9d7-53e8b6142f90
+status: experimental
+description: Detects execution through the Windows rundll32 utility.
+author: Fernando Bahia
+date: 2026/08/18
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        Image|endswith:
+            - '\rundll32.exe'
+    condition: selection
+falsepositives:
+    - Legitimate Windows components
+    - Legacy applications
+level: medium
+
+tags:
+    - attack.t1218.011

@@ -1,0 +1,25 @@
+title: Suspicious BITSAdmin Download Activity
+id: 3e7f9a14-62b8-4c51-a3d9-85f2167b4c20
+status: experimental
+description: Detects BITSAdmin being used to download remote content.
+author: Fernando Bahia
+date: 2026/08/18
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_image:
+        Image|endswith:
+            - '\bitsadmin.exe'
+    selection_download:
+        CommandLine|contains:
+            - '/transfer'
+            - '/create'
+    condition: selection_image and selection_download
+falsepositives:
+    - Legitimate software deployment
+    - Enterprise administration
+level: high
+tags:
+    - attack.command-and-control
+    - attack.t1105

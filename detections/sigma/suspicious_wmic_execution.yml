@@ -1,0 +1,21 @@
+title: Suspicious WMIC Execution
+id: 6d92f4b1-3e85-47a0-a216-58c7d931e604
+status: experimental
+description: Detects execution through Windows Management Instrumentation command line utilities.
+author: Fernando Bahia
+date: 2026/08/18
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        Image|endswith:
+            - '\wmic.exe'
+    condition: selection
+falsepositives:
+    - System administration
+    - Monitoring software
+level: medium
+tags:
+    - attack.execution
+    - attack.t1047
