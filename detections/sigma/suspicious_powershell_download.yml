@@ -1,0 +1,31 @@
+title: Suspicious PowerShell Download Activity
+id: 2f5c1b7e-8d42-4f0b-a6d3-91e7c2b54a10
+status: experimental
+description: Detects PowerShell processes using common download and remote content retrieval methods.
+author: Fernando Bahia
+date: 2026/08/18
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection_image:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+    selection_download:
+        CommandLine|contains:
+            - 'Invoke-WebRequest'
+            - 'iwr '
+            - 'Invoke-RestMethod'
+            - 'DownloadString'
+            - 'DownloadFile'
+            - 'WebClient'
+    condition: selection_image and selection_download
+falsepositives:
+    - Legitimate administrative scripts
+    - Software deployment tools
+    - Automation frameworks
+level: medium
+tags:
+    - attack.execution
+    - attack.t1059.001

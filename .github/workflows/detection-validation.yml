@@ -26,7 +26,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Validate Sigma rules
+      - name: Validate Sigma syntax
+        run: |
+          sigma check detections/sigma/*.yml
+
+      - name: Validate detection structure
         run: |
           python python/validators/validate_sigma.py
 
