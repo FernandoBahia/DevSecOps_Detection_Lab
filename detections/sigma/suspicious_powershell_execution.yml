@@ -1,0 +1,29 @@
+title: Suspicious PowerShell Execution
+id: 7f7f7d0a-7e6a-4f6c-9a9a-8c3b3e5a1f21
+status: experimental
+description: Detects PowerShell execution with common suspicious command-line parameters.
+author: Fernando Bahia
+date: 2026/08/18
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+        CommandLine|contains:
+            - '-enc'
+            - '-encodedcommand'
+            - '-nop'
+            - '-noprofile'
+            - '-w hidden'
+            - '-windowstyle hidden'
+    condition: selection
+falsepositives:
+    - Legitimate administrative PowerShell scripts
+    - Automation tools using PowerShell
+level: medium
+tags:
+    - attack.execution
+    - attack.t1059.001
