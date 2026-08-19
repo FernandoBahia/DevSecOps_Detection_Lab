@@ -1,0 +1,16 @@
+lab:
+  name: DevSecOps Detection Lab
+  version: "1.0"
+
+detection:
+  sigma_path: detections/sigma
+  yara_path: detections/yara
+  tests_path: python/tests
+
+validation:
+  sigma: true
+  yara: true
+  python: true
+
+pipeline:
+  fail_on_validation_error: true

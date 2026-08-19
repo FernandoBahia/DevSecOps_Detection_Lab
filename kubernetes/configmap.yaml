@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: detection-lab-config
+  namespace: detection-lab
+data:
+  SIGMA_PATH: "detections/sigma"
+  YARA_PATH: "detections/yara"
+  TESTS_PATH: "python/tests"
+  ENVIRONMENT: "lab"
