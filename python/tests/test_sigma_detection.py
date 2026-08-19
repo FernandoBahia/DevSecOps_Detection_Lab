@@ -61,3 +61,19 @@ def test_powershell_download_telemetry_matches_detection():
     assert "invoke-webrequest" in command_line
     assert "https://example.invalid" in command_line
     assert event["simulation"] == "powershell_download_activity"
+
+
+def test_certutil_download_telemetry_matches_detection():
+    path = Path(
+        "telemetry/samples/certutil_download.json"
+    )
+
+    with path.open(encoding="utf-8") as file:
+        event = json.load(file)
+
+    command_line = event["process"]["command_line"].lower()
+
+    assert event["process"]["name"].lower() == "certutil.exe"
+    assert "-urlcache" in command_line
+    assert "example.invalid" in command_line
+    assert event["simulation"] == "certutil_download"

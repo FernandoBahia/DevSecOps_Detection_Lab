@@ -1,0 +1,36 @@
+title: Suspicious Certutil Usage
+id: 91f7d7b4-4d6a-4a5c-8d72-31f5a7c9e201
+status: experimental
+description: Detects suspicious certutil usage associated with file download or decoding activity.
+author: Fernando Bahia
+date: 2026/08/19
+
+logsource:
+    category: process_creation
+    product: windows
+
+detection:
+    selection_image:
+        Image|endswith:
+            - '\certutil.exe'
+
+    selection_command:
+        CommandLine|contains:
+            - ' -urlcache'
+            - ' -decode'
+            - ' -decodehex'
+            - ' -verifyctl'
+
+    condition: selection_image and selection_command
+
+falsepositives:
+    - Legitimate certificate management
+    - Administrative scripts
+    - Enterprise certificate operations
+
+level: high
+
+tags:
+    - attack.command_and_control
+    - attack.t1105
+    - attack.defense_evasion

