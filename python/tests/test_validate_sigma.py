@@ -33,7 +33,7 @@ def test_sigma_rule_contains_encoded_command_detection():
 
     commands = rule["detection"]["selection"]["CommandLine|contains"]
 
-    assert "-enc" in commands
+    assert "-enc " in commands
     assert "-encodedcommand" in commands
 
 
