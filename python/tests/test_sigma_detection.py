@@ -93,3 +93,20 @@ def test_mshta_remote_telemetry_matches_detection():
     assert "https://example.invalid" in command_line
     assert ".hta" in command_line
     assert event["simulation"] == "mshta_remote_execution"
+
+
+def test_regsvr32_remote_telemetry_matches_detection():
+    path = Path(
+        "telemetry/samples/regsvr32_remote.json"
+    )
+
+    with path.open(encoding="utf-8") as file:
+        event = json.load(file)
+
+    command_line = event["process"]["command_line"].lower()
+
+    assert event["process"]["name"].lower() == "regsvr32.exe"
+    assert "https://example.invalid" in command_line
+    assert ".sct" in command_line
+    assert "scrobj.dll" in command_line
+    assert event["simulation"] == "regsvr32_remote_scriptlet"
