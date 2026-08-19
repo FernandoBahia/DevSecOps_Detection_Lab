@@ -1,47 +1,57 @@
-# Attack Simulation
+# Simulações de Detecção
 
-This directory contains controlled attack simulations used to generate
-telemetry for the Detection as Code laboratory.
+Este diretório contém scripts de simulação controlados usados para gerar cenários correspondentes às regras de detecção.
 
-## Objectives
+Os scripts são **artefatos de simulação**. Eles não têm a intenção de representar cadeias completas de ataque.
 
-- Generate representative security telemetry
-- Validate detection coverage
-- Test Sigma and YARA detections
-- Simulate attacker techniques in a controlled environment
-- Support detection engineering validation
+## Estrutura
 
-## Simulation Categories
+simulations/
+├── certutil/
+│   └── download.ps1
+├── mshta/
+│   └── remote_hta.ps1
+├── powershell/
+│   ├── download_activity.ps1
+│   └── encoded_command.ps1
+└── regsvr32/
+    └── remote_scriptlet.ps1
+```
 
-### PowerShell
+## Simulações disponíveis
 
-Simulations involving:
+| Simulação                          | Finalidade                                    |
+| ---------------------------------- | --------------------------------------------- |
+| `powershell/encoded_command.ps1`   | Simula execução de PowerShell codificado      |
+| `powershell/download_activity.ps1` | Simula atividade de download via PowerShell   |
+| `certutil/download.ps1`            | Simula comportamento de download via Certutil |
+| `mshta/remote_hta.ps1`             | Simula execução via Mshta                     |
+| `regsvr32/remote_scriptlet.ps1`    | Simula execução de scriptlet via Regsvr32     |
 
-- Encoded PowerShell
-- Suspicious PowerShell execution
-- PowerShell download activity
-- PowerShell WebClient usage
+## Telemetria
 
-### Windows LOLBins
+As simulações são representadas no projeto através de amostras de telemetria em JSON localizadas em:
 
-Simulations involving:
+```text
+telemetry/samples/
 
-- certutil
-- bitsadmin
-- mshta
-- regsvr32
-- rundll32
-- WMIC
+O motor de detecção opera sobre essas amostras de telemetria, em vez de exigir a execução dos scripts de simulação.
 
-### Network
+## Propósito
 
-Future simulations will generate network telemetry for:
+A camada de simulação fornece casos de teste reproduzíveis para engenharia de detecção.
 
-- Suspicious connections
-- DNS activity
-- HTTP/HTTPS activity
-- Command and control patterns
+Cada cenário pode ser associado a:
 
-## Safety
+```text
+Simulação
+    ↓
+Telemetria
+    ↓
+Regra de Detecção
+    ↓
+Motor de Detecção
+    ↓
+Resultado Esperado
 
-All simulations are intended for controlled laboratory environments.
+O projeto utiliza essa abordagem para testar a lógica de detecção sem a necessidade de um ambiente Windows real de ataque.
