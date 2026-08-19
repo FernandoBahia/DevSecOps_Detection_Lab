@@ -1,0 +1,11 @@
+{
+  "event_type": "process_creation",
+  "platform": "windows",
+  "process": {
+    "name": "powershell.exe",
+    "command_line": "powershell.exe -EncodedCommand AAAABBBB"
+  },
+  "user": "lab-user",
+  "host": "lab-windows",
+  "simulation": "powershell_encoded_command"
+}

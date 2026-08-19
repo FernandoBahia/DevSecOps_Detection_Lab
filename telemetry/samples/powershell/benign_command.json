@@ -1,0 +1,11 @@
+{
+  "event_type": "process_creation",
+  "platform": "windows",
+  "process": {
+    "name": "powershell.exe",
+    "command_line": "powershell.exe -NoProfile -Command Get-Process"
+  },
+  "user": "lab-user",
+  "host": "lab-windows",
+  "simulation": "benign_powershell"
+}
