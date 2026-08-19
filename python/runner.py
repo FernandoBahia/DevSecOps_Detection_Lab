@@ -59,13 +59,23 @@ def main():
     yara_rules = list(YARA_DIR.glob("*.yar"))
 
     if yara_rules:
-        for rule in yara_rules:
-            checks.append(
-                run_command(
-                    ["yara", str(rule), "/tmp/suspicious.ps1"],
-                    f"YARA validation: {rule.name}",
+        sample = ROOT / ".yara-test-sample.ps1"
+        sample.write_text(
+            "powershell.exe -EncodedCommand AAAABBBB\n"
+            "Invoke-Expression $payload\n",
+            encoding="utf-8",
+        )
+
+        try:
+            for rule in yara_rules:
+                checks.append(
+                    run_command(
+                        ["yara", str(rule), str(sample)],
+                        f"YARA validation: {rule.name}",
+                    )
                 )
-            )
+        finally:
+            sample.unlink(missing_ok=True)
 
     print()
     print("=" * 50)

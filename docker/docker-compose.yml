@@ -1,0 +1,8 @@
+services:
+  detection-lab:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: devsecops-detection-lab
+    working_dir: /app
+    command: python -m python.runner
