@@ -2,7 +2,7 @@
 
 Este diretório contém amostras de telemetria em JSON normalizado utilizadas pelo Detection Engine.
 
-As amostras representam eventos de process_creation do Windows associados a atividades tanto suspeitas quanto benignas.
+As amostras representam eventos process_creation do Windows associados a atividades suspeitas e benignas.
 
 ## Estrutura
 
@@ -25,7 +25,7 @@ powershell/benign_command.json
 powershell/download_activity.json
 powershell/encoded_command.json
 
-Essas amostras permitem que o projeto teste tanto detecções esperadas quanto comportamentos benignos do PowerShell.
+Essas amostras permitem testar tanto comportamentos esperados de detecção quanto atividades benignas de PowerShell.
 
 ### LOLBins
 
@@ -39,7 +39,7 @@ Essas amostras são utilizadas para validar detecções Sigma relacionadas a LOL
 
 ## Fluxo de Detecção
 
-A telemetria é consumida pelo engine de detecção em Python:
+A telemetria é consumida pelo Detection Engine em Python:
 
 JSON de Telemetria
       ↓
@@ -57,10 +57,10 @@ Executar a amostra de PowerShell codificado:
 
 make detect FILE=telemetry/samples/powershell/encoded_command.json
 
-O comportamento esperado é a identificação de uma detecção relacionada à regra de PowerShell codificado.
+O comportamento esperado é a identificação de uma ou mais detecções relacionadas à atividade de PowerShell codificado.
 
 ## Design
 
 Os arquivos de telemetria são intencionalmente pequenos e determinísticos.
 
-Eles existem para fornecer entradas de teste reproduzíveis para o pipeline de detecção, e não para funcionar como um sistema completo de coleta de eventos do Windows.
+Eles existem para fornecer entradas de teste reproduzíveis para o pipeline de detecção e não têm como objetivo funcionar como um sistema completo de coleta de eventos do Windows.
