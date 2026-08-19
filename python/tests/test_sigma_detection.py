@@ -77,3 +77,19 @@ def test_certutil_download_telemetry_matches_detection():
     assert "-urlcache" in command_line
     assert "example.invalid" in command_line
     assert event["simulation"] == "certutil_download"
+
+
+def test_mshta_remote_telemetry_matches_detection():
+    path = Path(
+        "telemetry/samples/mshta_remote.json"
+    )
+
+    with path.open(encoding="utf-8") as file:
+        event = json.load(file)
+
+    command_line = event["process"]["command_line"].lower()
+
+    assert event["process"]["name"].lower() == "mshta.exe"
+    assert "https://example.invalid" in command_line
+    assert ".hta" in command_line
+    assert event["simulation"] == "mshta_remote_execution"
